@@ -1,33 +1,35 @@
-import { useTodoContext } from "../../hooks/useTodosContext"
-import type { Todo } from "../../types"
+import { Link } from 'react-router'
+import { useTodoContext } from '../../hooks/useTodosContext'
+import type { Todo } from '../../types'
 
 type TodoItemProps = {
-    todo: Todo
-    deleteTodo: (todoId: number) => void
-    toggleTodo: (todoId: number, completed: boolean) => void
-
+  todo: Todo
+  deleteTodo: (todoId: number) => void
+  toggleTodo: (todoId: number, completed: boolean) => void
 }
 
-export const TodoItem = ({ todo } : TodoItemProps) => {
+export const TodoItem = ({ todo }: TodoItemProps) => {
+  const { deleteTodo, toggleTodo } = useTodoContext()
 
-    const {deleteTodo, toggleTodo} = useTodoContext()
+  const handleDeleteTodo = () => {
+    deleteTodo(todo.id)
+  }
 
-    const handleDeleteTodo = () => {
-        deleteTodo(todo.id)
-    }
+  const handleToggleTodo = () => {
+    toggleTodo(todo.id, todo.completed)
+  }
 
+  return (
+    <li className={todo.completed ? 'completed' : ''}>
+      <span>{todo.name}</span>
+      <button onClick={handleDeleteTodo}>Delete</button>
+      <button onClick={handleToggleTodo} className="toggle">
+        {todo.completed ? 'Undo' : 'Completed'}
+      </button>
 
-    const handleToggleTodo = () => {
-        toggleTodo (todo.id, todo.completed)
-    }
-
-    return (
-        <li className={todo.completed ? "completed" : ""}>
-    <span>{todo.name}</span>
-    <button onClick={handleDeleteTodo}>Delete</button>
-    <button onClick={handleToggleTodo} className="toggle">{todo.completed ? "Undo" : "Completed"}</button>
-
-</li>
-
-    )
+      <Link to={`/todos/${todo.id}`} className="link">
+        Go to detail
+      </Link>
+    </li>
+  )
 }

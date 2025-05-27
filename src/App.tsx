@@ -1,22 +1,39 @@
-import { Header } from "./components/header"
-import { TodosSection } from "./components/todos/todo-section"
-import { TodosProviders } from "./providers/todos-providers"
+import { BrowserRouter, Route, Routes } from 'react-router'
+import { TodosProviders } from './providers/todos-providers'
+import { Layout } from './components/layout'
+import { lazy, Suspense } from 'react'
+import { Spinner } from './components/spinner'
+
+const TodoDetailPage = lazy(() => import('./pages/todo-detail.page'))
+const TodoListPage = lazy(() => import('./pages/todo-list.page'))
 
 function App() {
   return (
-    <>
-    <TodosProviders>
-
-      <div className="container">
-        <Header title="My Todo List" subtitle="Add your tasks" />
-        <TodosSection />
-        <footer>
-          <p>Click on a task to mark it as completed</p>
-        </footer>
-      </div>
-          </TodosProviders>
-
-    </>
+    <Layout>
+      <TodosProviders>
+        <BrowserRouter>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Suspense fallback={<div>is loading</div>}>
+                  <TodoListPage />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/todos/:id"
+              element={
+                <Suspense fallback={<Spinner />}>
+                  <TodoDetailPage />
+                </Suspense>
+              }
+            />
+            <Route path="*" element={<div>Not found</div>} />
+          </Routes>
+        </BrowserRouter>
+      </TodosProviders>
+    </Layout>
   )
 }
 
