@@ -1,13 +1,13 @@
 type ErrorProps = {
-    message: string | null
-    onDismiss: () => void
+    message: string
+    onDismiss?: () => void
 }
 
 export const ErrorMessage = ({message, onDismiss} : ErrorProps)=>{
     return(
         <div className="error-message">
             <div className="error-content">
-                <span>!</span>
+                <span className="error-icon">!</span>
                 <span>{message}</span>
             </div>
             {onDismiss && (

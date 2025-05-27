@@ -18,7 +18,7 @@ const handleResponse = async <T>(response: Response): Promise<T> => {
   return data
 }
 
-export const todoApi = {
+export const tp = {
   async fetchTodos() {
     const response = await fetch(API_URL)
     return handleResponse<Todo[]>(response)

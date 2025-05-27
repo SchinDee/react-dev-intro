@@ -4,15 +4,16 @@ import { TodoItem } from "./todo-item"
 // import type { Todo } from "../../types"
 // import { todoApi } from "../../API/todoApi"
 import { Spinner } from "../spinner"
-import { useTodos } from "../../hooks/useTodos"
+// import { useTodos } from "../../hooks/useTodos"
 import { ErrorMessage } from "../error"
+import { useTodoContext } from "../../hooks/useTodosContext"
 
 export const TodosSection = () => {
-  const { addTodo, isLoading, todos, deleteTodo, toggleTodo, error, refetch} = useTodos()
+  const {isLoading, todos, deleteTodo, toggleTodo, error, refetch} = useTodoContext()
     return (
         <main>
-          <ErrorMessage message={error} onDismiss={refetch} />
-          <TodoForm addTodo={addTodo}/>
+          {error && <ErrorMessage message={error} onDismiss={refetch} />}
+          <TodoForm />
           <div className="todo-container">
             <ul id="todo-list" className={isLoading ? "isLoading" : ""}>
               {

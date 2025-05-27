@@ -33,9 +33,8 @@ export const useTodos = () => {
       })
     } catch (error) {
       console.error(error)
-    } finally {
       setError('failA')
-
+    } finally {
       setIsLoading(false)
     }
   }
