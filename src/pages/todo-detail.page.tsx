@@ -1,40 +1,30 @@
-import { useEffect, useState } from 'react'
+// import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router'
 import { todoApi } from '../API/todoApi'
-import type { Todo } from '../types'
+// import type { Todo } from '../types'
 import { Spinner } from '../components/spinner'
 import { Header } from '../components/header'
+import { useQuery } from '@tanstack/react-query'
 
 const TodoDetailPage = () => {
-  const [todo, setTodo] = useState<Todo | null>(null)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(false)
-
   const params = useParams()
 
-  useEffect(() => {
-    setLoading(true)
+  const {
+    data: todo,
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ['todo', params.id],
+    queryFn: () => {
+      return todoApi.fetchTodo(Number(params.id))
+    },
+  })
 
-    todoApi
-      .fetchTodo(Number(params.id))
-      .then((data) => {
-        setTodo(data)
-        setError(false)
-      })
-      .catch((err) => {
-        console.error('Failed to fetch todo:', err)
-        setError(true)
-      })
-      .finally(() => {
-        setLoading(false)
-      })
-  }, [params])
-
-  if (loading) {
+  if (isLoading) {
     return <Spinner />
   }
 
-  if (error || !todo) {
+  if (isError || !todo) {
     return (
       <div className="todo-detail-error">
         <p>Could not load todo item.</p>
