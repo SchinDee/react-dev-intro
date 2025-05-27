@@ -1,0 +1,41 @@
+import { useEffect, useState } from "react"
+import { TodoForm } from "./todo-form"
+import { TodoItem } from "./todo-item"
+import type { Todo } from "../../types"
+import { todoApi } from "../../API/todoApi"
+
+export const TodosSection = () => {
+
+  const [todos, setTodos] = useState<Todo[]>([])
+
+
+  const fetchTodos = async () => {
+    try {
+      const data = await todoApi.fetchTodos()
+      setTodos(data)
+
+    } catch (error) {
+      console.log("Failed to fetch todos: ", error)
+    }
+  }
+
+  useEffect(()=>{
+    console.log("use effect called")
+    fetchTodos()
+  }, [] )
+
+    return (
+        <main>
+          <TodoForm />
+          <div className="todo-container">
+            <ul id="todo-list">
+              {
+                todos.map((todo) => {
+                  return <TodoItem key={todo.id} todo= {todo}/>
+                })
+              }
+              </ul>
+          </div>
+        </main>
+    )
+}
