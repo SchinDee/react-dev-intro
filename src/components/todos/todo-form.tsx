@@ -1,6 +1,11 @@
 import { useState, type ChangeEvent } from "react"
 
-export const TodoForm = () => {
+type TodoFormProps = {
+    addTodo: (todoName: string) => void
+}
+
+
+export const TodoForm = ({addTodo}: TodoFormProps) => {
 
 const [todoName, setTodoName] = useState ("")
 
@@ -11,6 +16,7 @@ const [todoName, setTodoName] = useState ("")
 
     const handleSubmit = () => {
         console.log("Form submitted with todo:",todoName)
+        addTodo(todoName)
     }
 
     return (
