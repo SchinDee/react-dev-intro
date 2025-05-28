@@ -1,6 +1,6 @@
 // import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router'
-import { todoApi } from '../API/todoApi'
+import { todoApi } from '../api/todoApi'
 // import type { Todo } from '../types'
 import { Spinner } from '../components/spinner'
 import { Header } from '../components/header'

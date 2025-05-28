@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { todoApi } from '../API/todoApi'
+import { todoApi } from '../api/todoApi'
 
 export const useTodoCreate = () => {
   const queryClient = useQueryClient()

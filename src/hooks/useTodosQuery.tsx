@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import { todoApi } from '../API/todoApi'
+import { todoApi } from '../api/todoApi'
 
 export const useTodosQuery = () => {
   return useQuery({
