@@ -1,8 +1,8 @@
-import type { Todo } from '../types'
+import type { Todo, TodoToggle } from '../types'
 
 const API_URL = 'https://eli-workshop.vercel.app/api/users/scha28/todos'
 
-class ApiError extends Error {
+export class ApiError extends Error {
   constructor(message: string) {
     super(message)
     this.name = 'ApiError'
@@ -11,7 +11,7 @@ class ApiError extends Error {
 
 const handleResponse = async <T>(response: Response): Promise<T> => {
   if (!response.ok) {
-    throw new ApiError(`API req failed ${response.status}`)
+    throw new ApiError(`Api request failed ${response.status}`)
   }
 
   const data = await response.json()
@@ -47,7 +47,7 @@ export const todoApi = {
     })
     return handleResponse(response)
   },
-  async toggleTodo(id: number, completed: boolean) {
+  async toggleTodo({ id, completed }: TodoToggle) {
     const response = await fetch(`${API_URL}/${id}`, {
       method: 'PATCH',
       headers: {
