@@ -4,8 +4,6 @@ import type { Todo } from '../../types'
 
 type TodoItemProps = {
   todo: Todo
-  deleteTodo: (todoId: number) => void
-  toggleTodo: (todoId: number, completed: boolean) => void
 }
 
 export const TodoItem = ({ todo }: TodoItemProps) => {
