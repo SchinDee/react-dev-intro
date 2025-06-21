@@ -1,21 +1,47 @@
-import { TodoForm } from './todo-form'
+import { useState } from 'react'
+// import { TodoForm } from './todo-form'
 import { TodoItem } from './todo-item'
 import { Spinner } from '../spinner'
 import { ErrorMessage } from '../error-message'
 import { useTodosQuery } from '../../hooks/useTodosQuery'
 
 export const TodosSection = () => {
+  const [filterText, setFilterText] = useState('')
   const { data: todos, error, isLoading, refetch } = useTodosQuery()
+
+  const filteredTodos = todos?.filter((todo) =>
+    todo.name.toLowerCase().includes(filterText.toLowerCase()),
+  )
+
+  const showNothingFound =
+    !isLoading &&
+    todos &&
+    filteredTodos?.length === 0 &&
+    filterText.trim() !== ''
+
   return (
     <main>
       {error && <ErrorMessage message={error.message} onDismiss={refetch} />}
-      <TodoForm />
+
+      {/* <TodoForm /> */}
+
+      <div className="filter">
+        <input
+          type="text"
+          placeholder="Filter todos by name..."
+          value={filterText}
+          onChange={(e) => setFilterText(e.target.value)}
+        />
+      </div>
+
       <div className="todo-container">
         <ul>
-          {todos?.map((todo) => {
-            return <TodoItem key={todo.id} todo={todo} />
-          })}
+          {filteredTodos?.map((todo) => (
+            <TodoItem key={todo.id} todo={todo} />
+          ))}
         </ul>
+
+        {showNothingFound && <p style={{ padding: '1rem' }}>Nothing found.</p>}
         {isLoading && <Spinner />}
       </div>
     </main>
