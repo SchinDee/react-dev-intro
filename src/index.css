@@ -2,6 +2,7 @@
   /* Dark theme colors */
   --bg: #1a1b1e;
   --bg-secondary: #202225;
+    --bg-hover: #222326;
   --surface: #2c2d31;
   --primary: #7289da;
   --primary-hover: #5b6eae;
@@ -378,6 +379,11 @@ footer {
 
 }
 
-.todo-link:hover {
+li:hover {
+  background-color: var(--bg-hover);
+  transition: background-color 0.1s ease;
+}
+
+li:hover span {
   text-decoration: underline;
 }
