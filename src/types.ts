@@ -5,6 +5,11 @@ export type Todo = {
   description?: string
   priority?: number
 }
+export type NewTodo = {
+  name: string
+  description: string | null
+  priority: number
+}
 
 // export type TodoCreate = Omit<Todo, 'id' | 'completed'>
 

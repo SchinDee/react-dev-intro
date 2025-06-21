@@ -4,6 +4,7 @@ import { TodoItem } from './todo-item'
 import { Spinner } from '../spinner'
 import { ErrorMessage } from '../error-message'
 import { useTodosQuery } from '../../hooks/useTodosQuery'
+import { Link } from 'react-router-dom'
 
 export const TodosSection = () => {
   const [filterText, setFilterText] = useState('')
@@ -44,6 +45,11 @@ export const TodosSection = () => {
         {showNothingFound && <p style={{ padding: '1rem' }}>Nothing found.</p>}
         {isLoading && <Spinner />}
       </div>
+
+      <br></br>
+      <Link to="/add">
+        <button className="back-button"> Add new todo</button>
+      </Link>
     </main>
   )
 }
