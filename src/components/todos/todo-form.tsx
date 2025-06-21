@@ -8,6 +8,7 @@ export const TodoForm = () => {
   const [description, setDescription] = useState('')
   const [priority, setPriority] = useState('') // jako string, pak převedeme
   const [error, setError] = useState<string | null>(null)
+  const [isLoading, setIsLoading] = useState(false)
 
   const { mutate } = useTodoCreate()
   const navigate = useNavigate()
@@ -24,7 +25,8 @@ export const TodoForm = () => {
       priority: priority === '' ? 1 : Number(priority),
     }
 
-    console.log('Submitting todo:', newTodo)
+    // console.log('Submitting todo:', newTodo)
+    setIsLoading(true)
     mutate(newTodo, {
       onSuccess: () => {
         navigate('/')
@@ -71,8 +73,13 @@ export const TodoForm = () => {
         <option value="3">Low (3)</option>
       </select>
 
-      <button onClick={handleSubmit} type="submit" className="back-button">
-        Add
+      <button
+        onClick={handleSubmit}
+        type="submit"
+        className={`back-button ${isLoading ? 'isLoading' : ''}`}
+        disabled={isLoading}
+      >
+        {isLoading ? 'Adding...' : 'Add'}
       </button>
       <br></br>
       <br></br>
