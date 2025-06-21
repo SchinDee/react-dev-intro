@@ -20,14 +20,15 @@ export const TodoItem = ({ todo }: TodoItemProps) => {
 
   return (
     <li className={todo.completed ? 'completed' : ''}>
-      <span>{todo.name}</span>
+      <span>
+        <Link to={`/todos/${todo.id}`} className="todo-link">
+          {todo.name}
+        </Link>
+      </span>
       <button onClick={handleDeleteTodo}>Delete</button>
       <button onClick={handleToggleTodo} className="toggle">
         {todo.completed ? 'Undo' : 'Completed'}
       </button>
-      <Link to={`/todos/${todo.id}`} className="link">
-        Go to Detail
-      </Link>
     </li>
   )
 }

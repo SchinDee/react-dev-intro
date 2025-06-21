@@ -369,3 +369,15 @@ footer {
   font-style: normal;
   font-weight: normal;
 }
+
+
+.todo-link {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+
+}
+
+.todo-link:hover {
+  text-decoration: underline;
+}
