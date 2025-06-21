@@ -1,18 +1,20 @@
 import { useState } from 'react'
 import { useTodoCreate } from '../../hooks/useTodoCreate'
 import { useNavigate } from 'react-router-dom'
+import { ErrorMessage } from '../error-message'
 
 export const TodoForm = () => {
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
   const [priority, setPriority] = useState('') // jako string, pak převedeme
+  const [error, setError] = useState<string | null>(null)
 
   const { mutate } = useTodoCreate()
   const navigate = useNavigate()
 
   const handleSubmit = () => {
     if (name.trim() === '') {
-      alert('Name is required')
+      setError('Name is required.')
       return
     }
 
@@ -27,11 +29,17 @@ export const TodoForm = () => {
       onSuccess: () => {
         navigate('/')
       },
+      onError: (err) => {
+        setError(err.message || 'Something went wrong.')
+      },
     })
   }
 
   return (
     <div className="todo-form space-y-4">
+      {error && (
+        <ErrorMessage message={error} onDismiss={() => setError(null)} />
+      )}
       <label>Name*</label>
       <input
         value={name}
