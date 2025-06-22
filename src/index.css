@@ -372,23 +372,15 @@ footer {
 }
 
 
-.todo-link {
-  color: var(--text);
-  text-decoration: none;
+.todo-name {
   font-weight: 500;
 }
 
-a.todo-link:hover {
-  text-decoration: underline;
+.todo-item {
   cursor: pointer;
 }
-a.todo-link {
-  width: 100%;
-  display: inline-block;
 
-}
-
-ul li:hover {
+.todo-item:hover {
   background-color: var(--bg-hover);
   transition: background-color 0.2s ease;
 }
@@ -399,7 +391,7 @@ ul li:hover {
 
 .completed span .todo-link {
   color: var(--text-secondary);
-    text-decoration: line-through;
+  text-decoration: line-through;
   color: var(--text-secondary);
 }
 
@@ -407,3 +399,19 @@ ul li:hover {
   background-color: #43b582cb;
 }
 
+.todo-item {
+  padding: 0;
+}
+
+.todo-main {
+  padding: 16px;
+  flex: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.todo-actions {
+  flex: initial;
+  margin: 0;
+}
