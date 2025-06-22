@@ -25,16 +25,18 @@ export const TodoForm = () => {
       priority: priority === '' ? 1 : Number(priority),
     }
 
-    // console.log('Submitting todo:', newTodo)
+    mutate(newTodo)
+    navigate('/')
+
     setIsLoading(true)
-    mutate(newTodo, {
-      onSuccess: () => {
-        navigate('/')
-      },
-      onError: (err) => {
-        setError(err.message || 'Something went wrong.')
-      },
-    })
+    // mutate(newTodo, {
+    //   onSuccess: () => {
+    //     navigate('/')
+    //   },
+    //   onError: (err) => {
+    //     setError(err.message || 'Something went wrong.')
+    //   },
+    // })
   }
 
   return (
