@@ -13,20 +13,15 @@ const TodoDetailPage = () => {
 
   const handleDelete = () => {
     if (todo) {
-      deleteTodo(todo.id, {
-        onSuccess: () => navigate('/'),
-      })
+      navigate('/')
+      deleteTodo(todo.id)
     }
   }
 
   const handleToggle = () => {
     if (todo) {
-      toggleTodo(
-        { id: todo.id, completed: !todo.completed },
-        {
-          onSuccess: () => navigate('/'),
-        },
-      )
+      navigate('/')
+      toggleTodo({ id: todo.id, completed: !todo.completed })
     }
   }
 

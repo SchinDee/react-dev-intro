@@ -7,5 +7,6 @@ export const useTodosQuery = () => {
     queryFn: () => {
       return todoApi.fetchTodos()
     },
+    staleTime: 1_000,
   })
 }
