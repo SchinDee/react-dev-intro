@@ -72,7 +72,7 @@ input {
   outline: none;
 }
 
-input::placeholder {
+input::placeholder, textarea::placeholder {
   color: var(--text-secondary);
 }
 
@@ -360,17 +360,8 @@ footer {
   outline: none;
   box-shadow: var(--shadow);
   margin-bottom: 1rem;
+  font-family: inherit;
 }
-
-.todo-form input::placeholder,
-.todo-form textarea::placeholder {
-  color: var(--text-secondary);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-    Ubuntu, Cantarell, sans-serif;;
-  font-style: normal;
-  font-weight: normal;
-}
-
 
 .todo-name {
   font-weight: 500;
