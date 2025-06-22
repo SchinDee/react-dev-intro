@@ -373,18 +373,37 @@ footer {
 
 
 .todo-link {
-  color: white;
+  color: var(--text);
   text-decoration: none;
   font-weight: 500;
-
 }
 
-li span:hover {
+a.todo-link:hover {
   text-decoration: underline;
   cursor: pointer;
 }
+a.todo-link {
+  width: 100%;
+  display: inline-block;
 
-li:hover {
+}
+
+ul li:hover {
   background-color: var(--bg-hover);
   transition: background-color 0.2s ease;
 }
+
+.todo-detail-actions{
+  padding-top: 0;
+}
+
+.completed span .todo-link {
+  color: var(--text-secondary);
+    text-decoration: line-through;
+  color: var(--text-secondary);
+}
+
+.toggle:hover {
+  background-color: #43b582cb;
+}
+

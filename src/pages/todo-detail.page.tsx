@@ -1,9 +1,34 @@
-import { Link } from 'react-router'
+import { Link, useNavigate } from 'react-router-dom'
 import { Header } from '../components/header'
 import { useTodoQuery } from '../hooks/useTodoQuery'
+import { useTodoDelete } from '../hooks/useTodoDelete'
+import { useTodoToggle } from '../hooks/useTodoToggle'
 
 const TodoDetailPage = () => {
   const { data: todo, isError } = useTodoQuery()
+  const navigate = useNavigate()
+
+  const { mutate: deleteTodo } = useTodoDelete()
+  const { mutate: toggleTodo } = useTodoToggle()
+
+  const handleDelete = () => {
+    if (todo) {
+      deleteTodo(todo.id, {
+        onSuccess: () => navigate('/'),
+      })
+    }
+  }
+
+  const handleToggle = () => {
+    if (todo) {
+      toggleTodo(
+        { id: todo.id, completed: !todo.completed },
+        {
+          onSuccess: () => navigate('/'),
+        },
+      )
+    }
+  }
 
   if (isError || !todo) {
     return (
@@ -38,9 +63,20 @@ const TodoDetailPage = () => {
           )}
         </div>
 
-        <Link to="/">
-          <button className="back-button">Back to Home</button>
-        </Link>
+        <li className="todo-detail-actions">
+          <span>
+            <Link to="/">
+              <button className="back-button">Back to Home</button>
+            </Link>
+          </span>
+
+          <button onClick={handleDelete} className="">
+            Delete
+          </button>
+          <button onClick={handleToggle} className="toggle">
+            {todo.completed ? 'Mark as Active' : 'Mark as Completed'}
+          </button>
+        </li>
       </div>
     </>
   )
